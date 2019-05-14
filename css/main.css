@@ -81,7 +81,7 @@ pre {
        HEADER
 -----------------------*/
 .site-header {
-    padding: 5% 0 5% 0;
+    padding: 2% 0 2% 0;
     background: #303538;
     color: whitesmoke;
     text-align: center;
@@ -106,10 +106,8 @@ pre {
     margin-top: 0;
     margin-bottom: 0.1rem;
     font-family: 'Open Sans',sans-serif;
-    text-indent: -3px;
-    letter-spacing: -2px;
-    font-weight: bold;
-    font-size: 56px;
+    font-weight: normal;
+    font-size: 48px;
 }
 
 .site-header .site-description  {
