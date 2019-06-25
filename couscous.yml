@@ -19,11 +19,11 @@ menu:
             items:
                 home:
                     text: Home page
-                    # You can use relative urls
+                    # You can use relative urls (default)
                     relativeUrl: doc/faq.html
                 foo:
                     text: Another link
-                    # Or absolute urls
+                    # Or absolute urls (to external domains only, DO NOT use for local files)
                     absoluteUrl: https://example.com
         other:
             name: Other topics
