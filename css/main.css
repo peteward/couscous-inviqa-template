@@ -54,7 +54,7 @@ img {
        CONTENT
 -----------------------*/
 .container-fluid {
-    max-width: 1500px;
+    max-width: 1200px;
 }
 .content {
     font-family: "Merriweather", serif;
@@ -65,8 +65,24 @@ img {
     font-weight: 300;
     text-align: justify;
 }
+.content p {
+    margin: 10px 0 30px;
+}
+.content ul {
+    margin-bottom: 25px;
+}
+#sidebar {
+    font-family: "Merriweather", serif;
+    margin-bottom: 30px;
+}
 #sidebar .text-muted {
     font-weight: 500;
+}
+#sidebar .nav-group {
+    font-size: 20px;
+}
+#sidebar .nav-item.last {
+    margin-bottom: 13px;
 }
 
 /* OVERRIDE BOOTSTRAP */
@@ -107,14 +123,14 @@ pre {
     margin-bottom: 0.1rem;
     font-family: 'Open Sans',sans-serif;
     font-weight: normal;
-    font-size: 48px;
+    font-size: 44px;
 }
 
 .site-header .site-description  {
     padding: 0;
     font-size: 22px;
     font-weight: bold;
-    font-family: 'Titillium Web', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .site-header .button-line {

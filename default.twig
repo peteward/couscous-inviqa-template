@@ -6,7 +6,7 @@
 
         <title>{{ title }}</title>
 
-        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather:400,900,700,300|Open+Sans:400,800,700|Titillium+Web:600,400' type='text/css'>
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Merriweather:400,900,700,300|Open+Sans:400,800,700' type='text/css'>
         <link rel="stylesheet" href="{{ baseUrl }}/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ baseUrl }}/css/font-awesome.min.css">
         <link rel="stylesheet" href="{{ baseUrl }}/css/github.css">
@@ -21,7 +21,7 @@
                         Engineering Progression Framework
                     </a>
                 </h1>
-                <h2 class="site-description">{{ subTitle|default('Ladders, Skills & Promotion')|raw }}</h2>
+                <h2 class="site-description">Ladders, Skills & Promotion</h2>
             </div>
 
             <div class="text-left visible-xs-block" style="margin-left: 15px;">
@@ -29,32 +29,55 @@
             </div>
         </header>
 
-        <main class="{{ menu ? 'container-fluid' : 'container' }}">
+        <main class="container-fluid">
             <div class="row">
 
-                {% if menu is defined %}
-                    <nav id="sidebar" class="col-sm-3 col-lg-2 collapse in" role="navigation">
-                        {% for section in menu.sections %}
-                            <p class="text-muted">
-                                {{ section.name }}
-                            </p>
+                <nav id="sidebar" class="col-sm-3 collapse in" role="navigation">
 
+                {% for topLevelFolder in ['guides','career-ladder'] %}
+                    {% if pageTree[topLevelFolder] is defined %}
+                        <h3 class="nav-group">{{ topLevelFolder|replace("-", " ")|upper }}</h3>
+
+                        {% for fileName in pageTree[topLevelFolder] %}
                             <ul class="nav nav-pills nav-stacked">
-                                {% for itemId, item in section.items %}
-                                    <li class="{{ itemId == currentMenu ? 'active' }}">
-                                        <a href="{{ item.absoluteUrl|default(baseUrl ~ '/' ~ item.relativeUrl) }}">
-                                            {{ item.text|raw }}
-                                        </a>
-                                    </li>
-                                {% endfor %}
+                                <li class="nav-item">
+                                    <a class="small nav-link{{ 1 == 0 ? ' active' }}" href="{{ baseUrl ~ '/' ~ topLevelFolder ~ '/' ~ fileName }}">
+                                        {% set fileComponents = fileName|split('.') %}
+                                        {{ fileComponents[0]|replace("-", " ")|upper }}
+                                    </a>
+                                </li>
                             </ul>
                         {% endfor %}
+                    {% endif %}
+                {% endfor %}
 
-                    </nav>
+                {% set topLevelFolder = 'skills' %}
+                {% if pageTree[topLevelFolder] is defined %}
+                    <h3 class="nav-group">{{ topLevelFolder|replace("-", " ")|upper }}</h3>
+
+                    {% for categoryName, categoryFolder in pageTree[topLevelFolder] %}
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="nav-item">
+                                {{ categoryName|replace("-", " ")|upper }}
+                            </li>
+
+                        {% for skillFile in categoryFolder %}
+                            <li class="nav-item {% if loop.last %}last{% endif %}">
+                                <a class="small nav-link{{ 1 == 0 ? ' active' }}" href="{{ baseUrl ~ '/' ~ topLevelFolder ~ '/' ~ categoryName ~ '/' ~ skillFile }}">
+                                    {% set fileComponents = skillFile|split('.') %}
+                                    {{ fileComponents[0]|replace("-", " ")|upper }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    {% endfor %}
 
                 {% endif %}
 
-                <section class="{{ menu ? 'col-sm-9 col-lg-10 content' : 'col-sm-12 content' }}">
+                </nav>
+
+
+                <section class="col-sm-9 content">
                     {{ content|raw }}
                 </section>
 
